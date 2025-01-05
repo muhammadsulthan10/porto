@@ -103,43 +103,114 @@
             </div>
         </div>
         <div class="projects" id="projects">
-            <h1>MY PROJECTS</h1>
+            <h1 class="projectstitle">MY PROJECTS</h1>
             <div class="projects-item">
                 <div class="col-1 col-s-1 space"></div>
+                <!-- Landing Page -->
                 <div class="col-3 col-s-3 container">
-                    <img class="projectsthumbnail" src="image/servicesicon.png" alt="projectsthumbnail">"
+                    <img class="projectsthumbnail" src="image/lpage.png" alt="Landing Page" data-popup-src="image/lpage.png" data-title="Personal Landing Page" data-description="<p>A personal landing page designed to showcase professional information and an extensive portfolio. This webpage highlights personal achievements, skills, and expertise in various fields, supported by a clean, user-friendly interface. It includes an overview of key projects, testimonials, and an interactive contact form to connect with potential clients or collaborators.The design focuses on visual appeal and SEO optimization to enhance discoverability and accessibility.<br><br>Type : Website<br>Language : HTML, CSS, JavaScript<br></p>">
                     <div class="projectsdesc">
                         <div class="projectstext">
                             <h1>Landing Page</h1>
                             <p>Web Developing, SEO Marketing</p>
                         </div>
-                        <p class="projectsbutton"><a href="">-></a></p>
+                        <p class="projectsbutton"><a href="#" class="open-popup">-></a></p>
                     </div>
                 </div>
                 <div class="col-05 col-s-05 space"></div>
+
+                <!-- Invest Academy -->
                 <div class="col-3 col-s-3 container">
-                    <img class="projectsthumbnail" src="image/servicesicon.png" alt="projectsthumbnail">"
+                    <img class="projectsthumbnail" src="image/investaca.png" alt="Invest Academy" data-popup-src="image/investaca.png" data-title="Invest Academy" data-description="<p>A comprehensive educational platform for learning about investments. The website provides a curated library of investment-related content, including high-quality instructional videos and well-written eBooks. Users can explore topics ranging from beginner to advanced levels, such as stock market strategies, personal finance management, and wealth building. The platform is designed with an engaging user interface and seamless navigation, encouraging users to enhance their financial literacy and make informed decisions in their investment journey.<br><br>Type : Website<br>Language : PHP, MySQL, HTML, CSS, JavaScript<br></p>">
                     <div class="projectsdesc">
                         <div class="projectstext">
                             <h1>Invest Academy</h1>
                             <p>Web Developing, SEO Marketing</p>
                         </div>
-                        <p class="projectsbutton"><a href="">-></a></p>
+                        <p class="projectsbutton"><a href="#" class="open-popup">-></a></p>
                     </div>
                 </div>
                 <div class="col-05 col-s-05 space"></div>
+
+                <!-- IndoConcert -->
                 <div class="col-3 col-s-3 container">
-                    <img class="projectsthumbnail" src="image/servicesicon.png" alt="projectsthumbnail">"
+                    <img class="projectsthumbnail" src="image/android.png" alt="IndoConcert" data-popup-src="image/android.png" data-title="IndoConcert" data-description="<p>An innovative mobile application for booking concert tickets online in Indonesia. IndoConcert offers a seamless ticket-purchasing experience with real-time updates on upcoming concerts, event details, and ticket availability. Users can explore events by genre, location, or artist, and purchase tickets securely through the app. The application boasts an intuitive design, personalized recommendations, and features like digital ticket storage and concert reminders, making it the ultimate platform for music enthusiasts in Indonesia.<br><br>Type : Apps<br>Language : Java, Firebase<br></p>">
                     <div class="projectsdesc">
                         <div class="projectstext">
                             <h1>IndoConcert</h1>
                             <p>Apps Developing, Apps Design</p>
                         </div>
-                        <p class="projectsbutton"><a href="">-></a></p>
+                        <p class="projectsbutton"><a href="#" class="open-popup">-></a></p>
                     </div>
                 </div>
                 <div class="col-1 col-s-1 space"></div>
             </div>
+
+            <!-- Popup -->
+            <div class="popup" id="imagePopup">
+                <span class="popup-close" id="closePopup">&times;</span>
+                <div class="popup-content">
+                    <img src="" alt="Popup Image" id="popupImage">
+                    <div class="popup-teks">
+                        <h1 class="popup-title" id="popupTitle"></h1>
+                        <p class="popup-description" id="popupDescription"></p>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                // Get elements
+                const popup = document.getElementById('imagePopup');
+                const popupImage = document.getElementById('popupImage');
+                const popupTitle = document.getElementById('popupTitle');
+                const popupDescription = document.getElementById('popupDescription');
+                const closePopup = document.getElementById('closePopup');
+                const thumbnails = document.querySelectorAll('.projectsthumbnail');
+                const openPopupButtons = document.querySelectorAll('.open-popup');
+
+                // Open popup from button
+                openPopupButtons.forEach(button => {
+                    button.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const container = this.closest('.container'); // Find closest .container
+                        const thumbnail = container?.querySelector('.projectsthumbnail'); // Image inside container
+                        if (thumbnail && thumbnail.dataset.popupSrc) {
+                            popupImage.src = thumbnail.dataset.popupSrc;
+                            popupTitle.textContent = thumbnail.dataset.title || "Untitled";
+                            popupDescription.innerHTML = thumbnail.dataset.description || "<p>No description available.</p>";
+                            popup.style.display = 'flex';
+                        } else {
+                            console.error('Thumbnail or dataset not found for this button');
+                        }
+                    });
+                });
+
+                // Open popup from thumbnail
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.addEventListener('click', function () {
+                        if (this.dataset.popupSrc) {
+                            popupImage.src = this.dataset.popupSrc;
+                            popupTitle.textContent = this.dataset.title || "Untitled";
+                            popupDescription.innerHTML = this.dataset.description || "<p>No description available.</p>";
+                            popup.style.display = 'flex';
+                        } else {
+                            console.error('Dataset not found for this thumbnail');
+                        }
+                    });
+                });
+
+                // Close popup
+                closePopup.addEventListener('click', function () {
+                    popup.style.display = 'none';
+                });
+
+                // Close popup when clicking outside the image
+                popup.addEventListener('click', function (e) {
+                    if (e.target === popup) {
+                        popup.style.display = 'none';
+                    }
+                });
+            </script>
         </div>
         <div class="services" id="services">
             <h1>SERVICES I PROVIDE</h1>
